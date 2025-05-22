@@ -95,7 +95,11 @@ export const reorderCards = async (req: Request, res: Response) => {
   try {
     const { cardId, destinationColumn, destinationIndex } = req.body
 
-    if (!cardId || !destinationColumn || !destinationIndex) {
+    if (
+      cardId === undefined ||
+      destinationColumn === undefined ||
+      destinationIndex === undefined
+    ) {
       res.status(400).json({ message: 'Required parameters missing' })
       return
     }
