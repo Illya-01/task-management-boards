@@ -4,12 +4,6 @@ export const connectDB = async (): Promise<void> => {
   try {
     const uri = process.env.MONGODB_URI || ''
 
-    // Add connection options for better reliability
-    const options = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-
     console.log('Connecting to MongoDB...')
 
     const conn = await mongoose.connect(uri)
@@ -17,6 +11,6 @@ export const connectDB = async (): Promise<void> => {
     console.log(`MongoDB Connected: ${conn.connection.host}`)
   } catch (error) {
     console.error('MongoDB connection error:', error)
-    process.exit(1) // Exit with failure
+    process.exit(1)
   }
 }
