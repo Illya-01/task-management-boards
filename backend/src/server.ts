@@ -28,8 +28,10 @@ app.options('*', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.send('API is running...')
-  environment: process.env.NODE_ENV || 'development'
+  res.json({
+    message: 'API is running...',
+    environment: process.env.NODE_ENV || 'development',
+  })
 })
 
 app.use('/api/boards', boardRoutes)
@@ -46,5 +48,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Add this for Vercel serverless deployment
-connectDB().catch(console.error) // Initialize DB connection
 export default app
