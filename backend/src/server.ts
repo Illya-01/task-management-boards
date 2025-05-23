@@ -26,6 +26,13 @@ app.use('/api/cards', cardRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+// Only listen when running locally, not in Vercel serverless environment
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
+  })
+}
+
+// Add this for Vercel serverless deployment
+connectDB().catch(console.error) // Initialize DB connection
+export default app
