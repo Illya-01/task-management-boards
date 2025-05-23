@@ -13,11 +13,23 @@ connectDB()
 const app = express()
 const PORT = process.env.PORT || 5000
 
-app.use(cors())
+app.use(
+  cors({
+    origin: ['https://task-management-boards.vercel.app', 'http://localhost:5173'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  })
+)
+
 app.use(express.json())
+
+app.options('*', (req, res) => {
+  res.status(200).end()
+})
 
 app.get('/', (req, res) => {
   res.send('API is running...')
+  environment: process.env.NODE_ENV || 'development'
 })
 
 app.use('/api/boards', boardRoutes)
